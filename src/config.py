@@ -31,3 +31,5 @@ config_by_name = dict(
 )
 
 key = Config.SECRET_KEY
+
+version = "1.0.0"
