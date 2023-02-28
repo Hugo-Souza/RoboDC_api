@@ -16,5 +16,5 @@ migrate = Migrate()
 migrate.init_app(app, db)
 
 if __name__ == '__main__':
-    rospy.init_node(os.getenv('ROS_NODE'))
+    rospy.init_node(os.getenv('ROS_NODE'),anonymous=True)
     app.run()
