@@ -10,9 +10,7 @@ api = Namespace("ros", description="ROS controller")
 class ROS(Resource):
     def get(self, location):
         result = movebase_client(location)
-        rospy.sleep(10)
-        result = movebase_client("home")
-
+        
         if result:
             return { "result": f"Deu certo! { str(result) }" }, 200
         else:
@@ -108,6 +106,11 @@ def movebase_client(local):
     elif local == "Recepcao":
         goal.target_pose.pose.position.x = -12.49
         goal.target_pose.pose.position.y = -23.54
+        goal.target_pose.pose.orientation.z = 1.0 
+        goal.target_pose.pose.orientation.w = 0.0
+    elif local == "Home":
+        goal.target_pose.pose.position.x = -1.65
+        goal.target_pose.pose.position.y = -21.18
         goal.target_pose.pose.orientation.z = 1.0 
         goal.target_pose.pose.orientation.w = 0.0
     else: #home

@@ -16,5 +16,5 @@ migrate = Migrate()
 migrate.init_app(app, db)
 
 if __name__ == '__main__':
-    rospy.init_node(os.getenv('ROS_NODE'),anonymous=True)
-    app.run()
+    rospy.init_node(os.getenv('ROS_NODE') or 'movebase_client_py',anonymous=True)
+    app.run(host="0.0.0.0",port=5000)
