@@ -2,6 +2,7 @@
 <h4 align="center"> <a href="https://site.dc.ufscar.br/"> DC - Departamento de Computação</a>  </h4>
 <h4 align="center"> <a href="https://www.ufscar.br/">UFSCar - Universidade Federal de São Carlos</a>  </h4>
 
+
 <!---Esses são exemplos. Veja https://shields.io para outras pessoas ou para personalizar este conjunto de escudos. Você pode querer incluir dependências, status do projeto e informações de licença aqui--->
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/iuricode/README-template?style=for-the-badge)
@@ -17,43 +18,21 @@ API com as funcionalidades do Robô Anfitrião do Departamento de Computação d
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
-- [x] Tarefa 1
-- [x] Tarefa 2
-- [x] Tarefa 3
-- [ ] Tarefa 4
-- [ ] Tarefa 5
+- [x] Endpoint para movimentar robô até posição (v 1.0.0)
+- [x] Endpoint para retornar nome das localidades cadastradas (v 1.1.0)
+- [ ] Definir retornos das endpoints
 
-## 💻 Pré-requisitos
+## 💻 Pré-requisitos para desenvolvimento
 
-Antes de começar, verifique se você atendeu aos seguintes requisitos:
+Antes de começar a desenvolver, verifique se você atendeu aos seguintes requisitos:
 <!---Estes são apenas requisitos de exemplo. Adicionar, duplicar ou remover conforme necessário--->
-* Você instalou a versão mais recente de `<linguagem / dependência / requeridos>`
-* Você tem uma máquina `<Windows / Linux / Mac>`. Indique qual sistema operacional é compatível / não compatível.
-* Você leu `<guia / link / documentação_relacionada_ao_projeto>`.
+* Você instalou a as dependências do projeto `requirements.txt>`
+* Você tem uma máquina virtual executando ROS para simular a intereção com o robô. 
 
-## 🚀 Instalando API Robô do DC
+## 🤖 Usando API Robô do DC
 
-Para instalar o API Robô do DC, siga estas etapas:
-
-Linux e macOS:
-```
-<comando_de_instalação>
-```
-
-Windows:
-```
-<comando_de_instalação>
-```
-
-## ☕ Usando API Robô do DC
-
-Para usar API Robô do DC, siga estas etapas:
-
-```
-<exemplo_de_uso>
-```
-
-Adicione comandos de execução e exemplos que você acha que os usuários acharão úteis. Fornece uma referência de opções para pontos de bônus!
+A API do Robô do DC deve estar rodando na rede do Robô do DC. Basta acessar o endereço de IP e consumir seus serviços!
+A documentação da API pode ser acessada pelo endereço: 'IP FIXADO'
 
 ## 📫 Contribuindo para API Robô do DC
 
@@ -114,13 +93,11 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
 
 ## 😄 Seja um dos contribuidores<br>
 
-Quer fazer parte desse projeto? Clique [AQUI](CONTRIBUTING.md) e leia como contribuir.
+Quer fazer parte desse projeto? Contribua com o projeto e entre em contato com um dos outros contribuidores!
 
 ## 📝 Licença
 
 Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
 
-## 📝 Referências 
 
-[⬆ Voltar ao topo](#nome-do-projeto)<br>
 
