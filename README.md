@@ -26,7 +26,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 
 Antes de começar a desenvolver, verifique se você atendeu aos seguintes requisitos:
 <!---Estes são apenas requisitos de exemplo. Adicionar, duplicar ou remover conforme necessário--->
-* Você instalou a as dependências do projeto `requirements.txt>`
+* Você instalou a as dependências do projeto `requirements.txt`
 * Você tem uma máquina virtual executando ROS para simular a intereção com o robô. 
 
 ## 🤖 Usando API Robô do DC
@@ -38,7 +38,7 @@ A documentação da API pode ser acessada pelo endereço: 'IP FIXADO'
 
 <!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
 
-Para contribuir com <nome_do_projeto>, siga estas etapas:
+Para contribuir com o projeto, siga estas etapas:
 
 1. Bifurque este repositório.
 2. Crie um branch: `git checkout -b <nome_branch>`.
