@@ -42,8 +42,7 @@ class ROS(Resource):
         """Faz o robô se movimentar até o local recebido.
         Se o local recebido não estiver cadastrado, o robô se movimenta até o saguão do DC."""
 
-        #result = movebase_client(location)
-        result = teste(location)
+        result = movebase_client(location)
 
         if result:
             return { "result": f"Deu certo! { str(result) }" }, 200
@@ -53,7 +52,6 @@ class ROS(Resource):
 
 api.add_resource(goal, "/goal")
 api.add_resource(ROS, "/goTo/<location>")
-
 
 def movebase_client(local):
 
@@ -85,3 +83,4 @@ def movebase_client(local):
         rospy.signal_shutdown("Action server not available!")
     else:
         return client.get_result()
+        
