@@ -34,6 +34,8 @@ Antes de começar a desenvolver, verifique se você atendeu aos seguintes requis
 A API do Robô do DC deve estar rodando na rede do Robô do DC. Basta acessar o endereço de IP e consumir seus serviços!
 A documentação da API pode ser acessada pelo endereço: 'IP FIXADO'
 
+Em anexo há um link das telas da documentação: [Documentação Swagger (Usar e-mail institucional da UFSCar)](https://drive.google.com/file/d/1gWTtYiQFimsJ3uURp90wdI_6w06qmPUA/view?usp=share_link)
+
 ## 📫 Contribuindo para API Robô do DC
 
 <!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
