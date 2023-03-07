@@ -34,7 +34,7 @@ Antes de começar a desenvolver, verifique se você atendeu aos seguintes requis
 
 A API do Robô do DC deve estar rodando na rede do Robô do DC, atualmente a MrRoboto.
 
-Basta acessar o endereço de IP e consumir seus serviços: `192.168.0.200:500`.
+Basta acessar o endereço de IP e consumir seus serviços: `192.168.0.200:5000`.
 Acessar o endereço através dessa rede exibe a documentação do Swagger, usar as rotas nesse endereço realiza os serviços implementados.
 
 Em anexo há um link das telas da documentação: [Documentação Swagger (Usar e-mail institucional da UFSCar)](https://drive.google.com/file/d/18rFcjZxBCWmUO129xmMexJGpagIlR8rv/view?usp=share_link)
