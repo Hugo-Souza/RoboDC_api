@@ -1,6 +1,8 @@
 from flask import request
 from flask_restx import Namespace, Resource, fields
 
+import time
+
 import rospy
 import actionlib
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
@@ -27,6 +29,33 @@ available_locals = {
     "Home": (-1.65, -21.18, 1.0, 0.0)
 }
 
+ros_states = {
+    0: "PENDING",
+    1: "ACTIVE",
+    2: "PREEMPTED",
+    3: "SUCCEEDED",
+    4: "ABORTED",
+    5: "REJECTED",
+    6: "PREEMPTING",
+    7: "RECALLING",
+    8: "RECALLED",
+    9: "LOST",
+}
+
+ros_comm_state = {
+    0: "WAITING_FOR_GOAL_ACK",
+    1: "PENDING",
+    2: "ACTIVE",
+    3: "WAITING_FOR_RESULT",
+    4: "WAITING_FOR_CANCEL_ACK",
+    5: "RECALLING",
+    6: "PREEMPTING",
+    7: "DONE",
+    8: "LOST"
+}
+
+# global actionlib client
+client = None
 
 class goal(Resource):
     def get(self):
@@ -36,7 +65,6 @@ class goal(Resource):
             
         return { "available_locals": locals_list }, 200
 
-
 class ROS(Resource):
     def get(self, location):
         """Faz o robô se movimentar até o local recebido.
@@ -44,18 +72,48 @@ class ROS(Resource):
 
         result = movebase_client(location)
 
-        if result:
-            return { "result": f"Deu certo! { str(result) }" }, 200
+        if result != None or result != 9:
+            return { "result": ros_states[result] }, 200
         else:
-            return { "error": "Erro" }, 400
+            return { "error": str(result) }, 400
+
+class state(Resource):
+    def get(self):
+        """Retorna o status atual do robô."""
+
+        result = get_state_client()
+
+        if result:
+            return { 
+                "goal_state": ros_states[result[0]],
+                "comm_state": ros_comm_state[result[1]]
+            }, 200
+        else:
+            return { "error": "Goal não encontrada." }, 400
+
+class cancel(Resource):
+    """Envia um request de cancelamento para todas as goals."""
+
+    def delete(self):
+        lclient = actionlib.SimpleActionClient('move_base', MoveBaseAction)
+
+        if lclient:
+            lclient.cancel_all_goals()
+
+            return { "result": "Mensagem de cancelamento enviada." }, 400
+        else:
+            return { "error": "Nenhuma goal encontrada." }, 400
 
 
 api.add_resource(goal, "/goal")
 api.add_resource(ROS, "/goTo/<location>")
+api.add_resource(state, "/status")
+api.add_resource(cancel, "/cancel")
 
 def movebase_client(local):
 
-    client = actionlib.SimpleActionClient('move_base',MoveBaseAction)
+    global client
+    client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
 
     client.wait_for_server()
 
@@ -76,11 +134,15 @@ def movebase_client(local):
   
     client.send_goal(goal)
 
-    wait = client.wait_for_result()
+    time.sleep(3)
 
-    if not wait:
-        rospy.logerr("Action server not available!")
-        rospy.signal_shutdown("Action server not available!")
-    else:
-        return client.get_result()
+    print(client.get_goal_status_text())
+    print(client.get_state())
+
+    return client.get_state()
         
+def get_state_client():
+    if client:
+        return (client.get_state(), client.gh.get_comm_state())
+    else:
+        return None
