@@ -9,6 +9,27 @@ from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 
 api = Namespace("ros", description="ROS controller")
 
+goalResponseDto = api.model('goalResponseDto', {
+    'available_locals': fields.List(fields.String),
+})
+
+goToResponseDto = api.model('goToResponseDto', {
+    'result': fields.String,
+})
+
+stateResponseDto = api.model('errorResponseDto', {
+    'goal_state': fields.String,
+    'comm_state': fields.String,
+})
+
+cancelResponseDto = api.model('cancelResponseDto', {
+    'result': fields.String("Mensagem de cancelamento enviada"),
+})
+
+errorResponseDto = api.model('errorResponseDto', {
+    'error': fields.String,
+})
+
 available_locals = {
     "LE-1": (-37.99, -5.45, 1.0, 0.0),
     "LE-2": (-30.15, -5.03, 1.0, 0.0),
@@ -58,6 +79,8 @@ ros_comm_state = {
 client = None
 
 class goal(Resource):
+    @api.response(200, 'goalResponseDto', goalResponseDto)
+    @api.response(400, 'errorResponseDto', errorResponseDto)
     def get(self):
         """Retorna a lista de todos os destinos possíveis do robô."""
 
@@ -66,6 +89,8 @@ class goal(Resource):
         return { "available_locals": locals_list }, 200
 
 class ROS(Resource):
+    @api.response(200, 'goToResponseDto', goToResponseDto)
+    @api.response(400, 'errorResponseDto', errorResponseDto)
     def get(self, location):
         """Faz o robô se movimentar até o local recebido.
         Se o local recebido não estiver cadastrado, o robô se movimenta até o saguão do DC."""
@@ -78,6 +103,8 @@ class ROS(Resource):
             return { "error": str(result) }, 400
 
 class state(Resource):
+    @api.response(200, 'stateResponseDto', stateResponseDto)
+    @api.response(400, 'errorResponseDto', errorResponseDto)
     def get(self):
         """Retorna o status atual do robô."""
 
@@ -92,9 +119,10 @@ class state(Resource):
             return { "error": "Goal não encontrada." }, 400
 
 class cancel(Resource):
-    """Envia um request de cancelamento para todas as goals."""
-
+    @api.response(200, 'cancelResponseDto', cancelResponseDto)
+    @api.response(400, 'errorResponseDto', errorResponseDto)
     def delete(self):
+        """Envia um request de cancelamento para todas as goals."""
         lclient = actionlib.SimpleActionClient('move_base', MoveBaseAction)
 
         if lclient:
@@ -103,7 +131,6 @@ class cancel(Resource):
             return { "result": "Mensagem de cancelamento enviada." }, 400
         else:
             return { "error": "Nenhuma goal encontrada." }, 400
-
 
 api.add_resource(goal, "/goal")
 api.add_resource(ROS, "/goTo/<location>")

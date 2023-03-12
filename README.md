@@ -22,6 +22,8 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [x] Endpoint para movimentar robô até posição (v 1.0.0)
 - [x] Endpoint para retornar nome das localidades cadastradas (v 1.1.0)
 - [ ] Definir retornos das endpoints
+- [ ] Definir retornos das endpoints
+- [ ] Isolar modelos e utilidades dos controllers
 
 ## 💻 Pré-requisitos para desenvolvimento
 
