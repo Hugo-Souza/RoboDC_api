@@ -128,7 +128,7 @@ class cancel(Resource):
         if lclient:
             lclient.cancel_all_goals()
 
-            return { "result": "Mensagem de cancelamento enviada." }, 400
+            return { "result": "Mensagem de cancelamento enviada." }, 200
         else:
             return { "error": "Nenhuma goal encontrada." }, 400
 
