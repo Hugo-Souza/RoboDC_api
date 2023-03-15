@@ -17,7 +17,7 @@ goToResponseDto = api.model('goToResponseDto', {
     'result': fields.String,
 })
 
-stateResponseDto = api.model('errorResponseDto', {
+stateResponseDto = api.model('stateResponseDto', {
     'goal_state': fields.String,
     'comm_state': fields.String,
 })
