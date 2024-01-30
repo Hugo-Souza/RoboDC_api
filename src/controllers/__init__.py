@@ -3,6 +3,8 @@ from flask_restx import Api
 
 from src.controllers.ros_controller import api as ros_ns
 from src.controllers.metadata_controller import api as metadata_ns
+from src.controllers.led_controller import api as led_ns
+
 
 from ..config import version
 
@@ -27,3 +29,4 @@ api = Api(
 
 api.add_namespace(ros_ns)
 api.add_namespace(metadata_ns)
+api.add_namespace(led_ns)
