@@ -32,4 +32,4 @@ config_by_name = dict(
 
 key = Config.SECRET_KEY
 
-version = "1.2.2"
+version = "1.2.3"
