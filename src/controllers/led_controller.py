@@ -62,8 +62,38 @@ class changeExpression(Resource):
                 "expressionNumber": expressionNumber,
                 "expressionBits": bin(int(expressionNumber)),
             }, 200
-        except:
-            return { "Requesto to change robot expression failed." }, 400
+        except Exception as e:
+            return { 
+                "error": "Request to change robot expression failed.",
+                "message": str(e) 
+            }, 400
+        
+    def post(self):
+        try:
+            data = request.get_json()
+            expression_values = data.get('expressionValues', [])
+
+            if not expression_values:
+                return {"error": "A lista de expressionNumbers está vazia."}, 400
+
+            port = 1
+            socket = bt.BluetoothSocket(bt.RFCOMM)
+            socket.connect((address, port))
+
+            for expression_value in expression_values:
+                socket.send(bytes([int(expression_value)]))
+
+            socket.close()
+
+            return {
+                "result": "OK",
+                "sentExpressions": expression_values
+            }, 200
+        except Exception as e:
+            return {
+                "error": "Request to change robot expression failed.",
+                "message": str(e)
+            }, 400
         
 class changeExpressionByBits(Resource):
     def get(self, expressionBits):
@@ -78,16 +108,23 @@ class changeExpressionByBits(Resource):
                 "expressionNumber": int(expressionBits, 2),
                 "expressionBits": expressionBits,
             }, 200
-        except:
-            return { "Request to change robot expression failed." }, 400
+        except Exception as e:
+            return {
+                "error": "Request to change robot expression failed.",
+                "message": str(e)
+            }, 400
 
 class getExpressionsList(Resource):
     def get(self):
         try:
             return expressions, 200
-        except:
-            return { "Request to change robot expression failed." }, 400
+        except Exception as e:
+            return {
+                "error": "Request to change robot expression failed.",
+                "message": str(e)
+            }, 400
 
 api.add_resource(changeExpression, "/changeExpression/<expressionNumber>")
+api.add_resource(changeExpression, "/changeExpression")
 api.add_resource(changeExpressionByBits, "/changeExpressionByBits/<expressionBits>")
 api.add_resource(getExpressionsList, "/getExpressionsList")
