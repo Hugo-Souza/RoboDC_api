@@ -123,7 +123,6 @@ class getExpressionsList(Resource):
                 "message": str(e)
             }, 400
 
-api.add_resource(changeExpression, "/changeExpression/<expressionNumber>")
 api.add_resource(changeExpression, "/changeExpression")
 api.add_resource(changeExpressionByBits, "/changeExpressionByBits/<expressionBits>")
 api.add_resource(getExpressionsList, "/getExpressionsList")
