@@ -48,25 +48,7 @@ expressions = {
     45: "mouth opened",
 }
 
-class ChangeExpression(Resource):
-    def get(self, expressionNumber):
-        try:
-            port = 1
-            socket = bt.BluetoothSocket(bt.RFCOMM)
-            socket.connect((address, port)) 
-            socket.send(bytes([int(expressionNumber)]))	
-            socket.close()
-            return { 
-                "result": "OK", 
-                "expressionNumber": expressionNumber,
-                "expressionBits": bin(int(expressionNumber)),
-            }, 200
-        except Exception as e:
-            return { 
-                "error": "Request to change robot expression failed.",
-                "message": str(e) 
-            }, 400
-        
+class ChangeExpression(Resource):   
     def post(self):
         try:
             data = request.get_json()
@@ -93,7 +75,26 @@ class ChangeExpression(Resource):
                 "error": "Request to change robot expression failed.",
                 "message": str(e)
             }, 400
-        
+
+class ChangeExpressionByNumber(Resource):
+    def get(self, expressionNumber):
+        try:
+            port = 1
+            socket = bt.BluetoothSocket(bt.RFCOMM)
+            socket.connect((address, port)) 
+            socket.send(bytes([int(expressionNumber)]))	
+            socket.close()
+            return { 
+                "result": "OK", 
+                "expressionNumber": expressionNumber,
+                "expressionBits": bin(int(expressionNumber)),
+            }, 200
+        except Exception as e:
+            return { 
+                "error": "Request to change robot expression failed.",
+                "message": str(e) 
+            }, 400
+
 class ChangeExpressionByBits(Resource):
     def get(self, expressionBits):
         try:
@@ -123,6 +124,7 @@ class ExpressionsList(Resource):
                 "message": str(e)
             }, 400
 
-api.add_resource(ChangeExpression, "/changeExpression", "/changeExpression/<expressionNumber>")
+api.add_resource(ChangeExpression, "/changeExpression")
+api.add_resource(ChangeExpressionByNumber, "/changeExpression/<expressionNumber>")
 api.add_resource(ChangeExpressionByBits, "/changeExpressionByBits/<expressionBits>")
 api.add_resource(ExpressionsList, "/getExpressionsList")
