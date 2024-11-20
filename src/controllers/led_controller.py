@@ -48,7 +48,7 @@ expressions = {
     45: "mouth opened",
 }
 
-class changeExpression(Resource):
+class ChangeExpression(Resource):
     def get(self, expressionNumber):
         try:
             port = 1
@@ -94,7 +94,7 @@ class changeExpression(Resource):
                 "message": str(e)
             }, 400
         
-class changeExpressionByBits(Resource):
+class ChangeExpressionByBits(Resource):
     def get(self, expressionBits):
         try:
             port = 1
@@ -113,7 +113,7 @@ class changeExpressionByBits(Resource):
                 "message": str(e)
             }, 400
 
-class getExpressionsList(Resource):
+class ExpressionsList(Resource):
     def get(self):
         try:
             return expressions, 200
@@ -123,6 +123,6 @@ class getExpressionsList(Resource):
                 "message": str(e)
             }, 400
 
-api.add_resource(changeExpression, "/changeExpression")
-api.add_resource(changeExpressionByBits, "/changeExpressionByBits/<expressionBits>")
-api.add_resource(getExpressionsList, "/getExpressionsList")
+api.add_resource(ChangeExpression, "/changeExpression", "/changeExpression/<expressionNumber>")
+api.add_resource(ChangeExpressionByBits, "/changeExpressionByBits/<expressionBits>")
+api.add_resource(ExpressionsList, "/getExpressionsList")
