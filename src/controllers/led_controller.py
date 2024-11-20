@@ -43,10 +43,9 @@ expressions = {
     84: "right eye real_right",
     13: "mouth happy",
     21: "mouth sad",
-    29: "mouth verry_happy",
-    37: "mouth partially_open",
-    45: "mouth neutral",
-    53: "mouth opened",
+    29: "mouth partially_open",
+    37: "mouth neutral",
+    45: "mouth opened",
 }
 
 class changeExpression(Resource):
